@@ -1,0 +1,25 @@
+{%extends "base.html"%}
+ {%block head%}<meta http-equiv="refresh" content ="2">{%endblock%}
+    {%block title%}table{%endblock%}
+      {%block body%}
+  </head>
+    <body>
+    <div class="container">
+      <h2>Table</h2>  
+      <table  class="table table-condensed" border="1" style="width:30%">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>value</th>
+        </tr>
+        </thead>
+        <tr>
+          <td>{{var}}</td>
+          <td>50</td>
+        </tr>
+      </table>
+      <form action="./table" method ="get">
+      <input type="submit" value="REFRESH" href="./table">
+      </form>
+      </div>
+      {%endblock%}

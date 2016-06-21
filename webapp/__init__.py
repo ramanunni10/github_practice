@@ -1,6 +1,7 @@
 from flask import Flask,render_template,redirect,request,flash
 from datetime import datetime as dt
 import time as t
+from conf_sq import config
 app=Flask(__name__)
 app.secret_key="this is secret key"
 
@@ -17,8 +18,12 @@ def home():
 
 @app.route('/table')
 def table():
-	time1=t.strftime('%l:%M %S%p %b %d, %Y')
-	return render_template("table.html",var=time1)	
+	
+	date,value=read()
+	'''read value from data base'''
+
+
+	return render_template("table.html",date=date,value=v)	
 
 
 if __name__ == '__main__':

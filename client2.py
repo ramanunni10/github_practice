@@ -2,10 +2,11 @@ import socket
 import threading
 from threading import Thread
 s= socket.socket()
-host='192.168.1.8'
+
+
 port=12345
 
-s.connect(('192.168.1.8',12345))
+s.connect(('127.0.0.1',12345))
 
 def recieve():
 	global s

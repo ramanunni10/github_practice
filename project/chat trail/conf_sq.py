@@ -17,14 +17,14 @@ class config():
 		try:
 			conn.execute("INSERT INTO table1(date,VALUE) VALUES(?,?);",(date,value))
 			conn.commit()
-		except sqlite3.OperationalError as e:
+		except sq.OperationalError as e:
 			print e
 			db.create_table()
 		conn.close()
 
 	def read(self):
 		conn = sq.connect('database.db')
-		cur=conn.execute("SELECT * FROM table1 ORDER BY date DESC LIMIT 1")
+		cur=conn.execute("SELECT * FROM table1 ORDER BY date LIMIT 1")
 		for data in cur:
 			date=data[1]
 			VALUE= data[2]

@@ -16,4 +16,3 @@ while 1:
 		s.close()
 		break
 	print "client:"+reply 
-

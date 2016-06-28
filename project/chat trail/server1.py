@@ -1,31 +1,36 @@
+
 import socket
 import threading
+from conf_sq1 import db
 from threading import Thread
 s= socket.socket()
 
-
+flag=True
 port=12345
 
 s.connect(('127.0.0.1',12345))
 
 def recieve():
-	global s
+	global s,flag
 	try:
-		while 1:
+		while flag:
 			#print "waiting to recieve"
 
 			try:
 				reply=s.recv(1024)
+				t,x=reply.split(',')
+				db.insert_values(x,t)
+		
 			except Exception, e:
 				reply = 0
 				print 'send: ', e
 			
 			if reply =='q':
-				#s.close()
+				flag=0
 				break
 			elif not reply:
 				print "("
-				#s.close()
+				flag=0
 				break
 			print "server:"+reply 
 	finally:
@@ -34,9 +39,9 @@ def recieve():
 	s.send('q')
 	print "recieved"
 def send():
-	global s
+	global s,flag
 	try:		
-		while 1:
+		while flag:
 			#print "waitinig to send"
 			x=raw_input("me:")
 			
@@ -45,7 +50,7 @@ def send():
 					s.send('q')
 				except Exception, e:
 					print 'send: ', e
-				
+				flag=0
 				#s.close()
 				break
 			s.send(x)
@@ -55,5 +60,6 @@ def send():
 	print "send"
 t=Thread(target=recieve)
 t.start()
+
 send()	
 s.close()

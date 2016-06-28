@@ -25,14 +25,13 @@ def recieve():
 				break
 			elif not reply:
 				print "("
-				#s.close()
 				break
 			print "server:"+reply 
 	finally:
 		print "finally block"
-		#s.close()
 	s.send('q')
 	print "recieved"
+
 def send():
 	global s
 	try:		

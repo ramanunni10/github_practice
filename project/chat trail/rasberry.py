@@ -6,7 +6,7 @@ from time import strftime
 
 s= socket.socket()
 
-s.bind(('127.0.0.1',12345))
+s.bind(('192.168.1.12',12345))
 s.listen(1)
 
 print "waiting for connect"

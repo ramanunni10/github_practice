@@ -15,33 +15,41 @@ print "connected"
 
 def send():
 	global s
-	while 1:
-		x=raw_input("server:")
-		t=strftime("%d-%m-%Y %I:%M:%S")
-		try:
-			c.send(x+","+t)
-		except Exception, e:
+	try:
+		while 1:
+			tempr=raw_input("server:")
+			if tempr =='q':
+				break
+			dater=strftime("%d-%m-%Y %I:%M:%S")
+			#num= 300
+			if (int(tempr) > 300 ) or (int(tempr)<0):
+				tempr='e'	
 
-			db.insert_values(t,x)
-		if x =='q':
-			s.close()
-			break 
+			try:
+				c.send(dater+","+tempr)
+			except Exception, e:
+				db.insert_values(dater,tempr)
+
+			  
+	finally:
+		print "send is closing s"
+		s.close()
 def rec():
 	global c
-	while 1:
-		#print "waiting to recieve"
-		reply=c.recv(1024)
-
-		if reply =='q':
-			s.close()
-			break
-		elif not reply:
-			print ":("
-			s.close()
-			break
-		print "client:"+reply 
-
+	try:
+		while 1:
+			#print "waiting to recieve"
+			reply=c.recv(1024)
+			if reply =='q':
+				break
+			elif not reply:
+				print ":("
+				break 
+	finally:
+		print "rec is closing s"
+		s.close()
 t=Thread(target=rec)
 t.start()
 send()
+
 	 

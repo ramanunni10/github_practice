@@ -22,14 +22,19 @@ class config():
 			db.create_table()
 		conn.close()
 
-	def read(self):
+	def read_one(self):
 		conn = sq.connect('database1.db')
-		cur=conn.execute("SELECT * FROM table1 ORDER BY date LIMIT 1")
-		for data in cur:
-			date=data[1]
-			VALUE= data[2]
-		print date,VALUE
+		try:
+			cur=conn.execute("SELECT * FROM table1 ORDER BY date DESC LIMIT 1")
+			for data in cur:
+				date=data[1]
+				VALUE= data[2]
+		except sq.OperationalError as e:
+			print e
+			db.create_table()			
+		conn.close()
 		return date,VALUE
- 		conn.close()
+		
 
-db=config() 
+db=config()
+db_2=config()

@@ -25,11 +25,10 @@ class config():
 	def read_one(self):
 		conn = sq.connect('end_user.db')
 		try:
-			cur=conn.execute("SELECT * FROM table1 ORDER BY date LIMIT 1")
+			cur=conn.execute("SELECT * FROM table1 ORDER BY date DESC LIMIT 1")
 			for data in cur:
 				date=data[1]
 				VALUE= data[2]
-			print date,VALUE
 		except sq.OperationalError as e:
 			print e
 			db.create_table()			
@@ -40,7 +39,7 @@ class config():
  	def read_all(self):
  		conn = sq.connect('end_user.db')
  		try:
-			cur=conn.execute("SELECT * FROM table1 ORDER BY date ")
+			cur=conn.execute("SELECT * FROM table1 ORDER BY date DESC ")
 		except sq.OperationalError as e:
 			print e
 			db.create_table()	

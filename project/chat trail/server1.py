@@ -1,4 +1,3 @@
-
 import socket
 import threading
 from conf_sq1 import db
@@ -19,7 +18,7 @@ def recieve():
 			try:
 				reply=s.recv(1024)
 				t,x=reply.split(',')
-				db.insert_values(x,t)
+				db.insert_values(t,x)
 		
 			except Exception, e:
 				reply = 0
